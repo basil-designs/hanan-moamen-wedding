@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حنان و مؤمن | دعوة زفاف</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FBF5EA;
+    --ivory-deep:#F3E9D8;
+    --emerald:#1F3D2B;
+    --emerald-deep:#132A1C;
+    --gold:#B08D57;
+    --gold-light:#D9BE8F;
+    --ink:#2A2420;
+    --rose:#E9CFC9;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Tajawal', sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---------- Curtain intro ---------- */
+  .curtain{
+    position:fixed; top:0; bottom:0; width:52%; z-index:100;
+    background:
+      repeating-linear-gradient(90deg, var(--emerald) 0px, var(--emerald-deep) 3px, var(--emerald) 6px, var(--emerald-deep) 9px),
+      linear-gradient(180deg, var(--emerald) 0%, var(--emerald-deep) 100%);
+    transition: transform 1.8s cubic-bezier(.77,0,.18,1);
+    box-shadow: 0 0 60px rgba(0,0,0,.4) inset;
+  }
+  .curtain::after{
+    content:''; position:absolute; top:0; bottom:0; width:6px;
+    background:linear-gradient(180deg, var(--gold-light), var(--gold));
+  }
+  .curtain-left{ left:0; }
+  .curtain-left::after{ right:0; }
+  .curtain-right{ right:0; }
+  .curtain-right::after{ left:0; }
+  body.opened .curtain-left{ transform:translateX(-105%); }
+  body.opened .curtain-right{ transform:translateX(105%); }
+  .bismillah-loader{
+    position:fixed; inset:0; z-index:101; display:flex; align-items:center; justify-content:center;
+    font-family:'Aref Ruqaa', serif; color:var(--gold-light); font-size:7vw; letter-spacing:2px;
+    opacity:1; transition:opacity 1s ease; pointer-events:none;
+  }
+  body.opened .bismillah-loader{ opacity:0; }
+
+  /* ---------- Petals ---------- */
+  .petal{
+    position:fixed; top:-5%; z-index:5; pointer-events:none;
+    width:10px; height:10px; border-radius:50% 0 50% 50%;
+    background:var(--rose); opacity:.7;
+    animation:fall linear forwards;
+  }
+  @keyframes fall{
+    to{ transform:translateY(110vh) rotate(360deg); opacity:0;}
+  }
+
+  section{
+    position:relative; padding:90px 8vw 70px; text-align:center;
+    max-width:640px; margin:0 auto;
+  }
+
+  .fade-up{ opacity:0; transform:translateY(28px); transition:opacity 1s ease, transform 1s ease; }
+  .fade-up.visible{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background:
+      radial-gradient(circle at 50% 15%, rgba(176,141,87,.12), transparent 60%),
+      var(--ivory);
+  }
+  .arch-svg{ width:70vw; max-width:300px; margin-bottom:18px; }
+  .bism{
+    font-family:'Amiri', serif; font-size:22px; color:var(--emerald); margin-bottom:22px; letter-spacing:1px;
+  }
+  .eyebrow{
+    font-size:14px; letter-spacing:4px; color:var(--gold); text-transform:uppercase; margin-bottom:10px;
+  }
+  .hero-date{
+    font-family:'Tajawal',sans-serif; font-weight:500; letter-spacing:2px; color:var(--emerald); font-size:15px; margin-bottom:26px;
+  }
+  .names{
+    font-family:'Aref Ruqaa', serif; font-size:15vw; line-height:1.15; color:var(--emerald-deep);
+  }
+  .names small{ display:block; font-size:8vw; color:var(--gold); font-family:'Aref Ruqaa',serif; margin:6px 0;}
+  @media(min-width:520px){ .names{font-size:64px;} .names small{font-size:34px;} }
+  .scroll-cue{
+    margin-top:46px; font-size:13px; color:var(--emerald); letter-spacing:2px;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .scroll-cue .arrow{
+    width:1px; height:34px; background:linear-gradient(var(--gold), transparent);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:.3} 50%{opacity:1} }
+
+  /* ---------- Divider ---------- */
+  .divider{ display:flex; align-items:center; justify-content:center; gap:14px; margin:6px auto 34px; width:60%; }
+  .divider span{ flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .divider svg{ width:22px; height:22px; fill:var(--gold); }
+
+  /* ---------- Ayah ---------- */
+  .ayah-section{ background:var(--ivory-deep); }
+  .ayah-quote{ font-size:34px; color:var(--gold); font-family:'Amiri',serif; }
+  .ayah-text{
+    font-family:'Amiri', serif; font-size:22px; line-height:2.1; color:var(--emerald-deep); margin:10px 0 18px;
+  }
+  .ayah-source{ color:var(--gold); font-size:14px; letter-spacing:1px; }
+  .romantic-line{
+    margin-top:30px; font-size:16px; line-height:2; color:var(--ink); font-weight:300;
+  }
+
+  /* ---------- Countdown ---------- */
+  .countdown-title{ font-family:'Aref Ruqaa',serif; font-size:30px; color:var(--emerald-deep); margin-bottom:34px; }
+  .countdown{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+  .cbox{
+    background:var(--emerald); color:var(--ivory); border-radius:10px;
+    width:76px; padding:16px 0; box-shadow:0 8px 20px rgba(31,61,43,.25);
+    border:1px solid var(--gold);
+  }
+  .cbox .num{ font-size:30px; font-weight:700; font-family:'Tajawal',sans-serif; }
+  .cbox .label{ font-size:11px; letter-spacing:1px; color:var(--gold-light); margin-top:4px; }
+
+  /* ---------- Details ---------- */
+  .details-section{ background:var(--ivory-deep); }
+  .detail-card{
+    display:flex; align-items:center; gap:16px; text-align:right;
+    background:var(--ivory); border:1px solid var(--gold-light); border-radius:14px;
+    padding:18px 20px; margin-bottom:16px;
+  }
+  .detail-card svg{ width:28px; height:28px; fill:var(--gold); flex-shrink:0; }
+  .detail-card .d-title{ font-size:13px; color:var(--gold); letter-spacing:1px; margin-bottom:4px; }
+  .detail-card .d-value{ font-size:17px; color:var(--emerald-deep); font-weight:500; }
+
+  /* ---------- Location CTA ---------- */
+  .loc-msg{ font-size:16px; line-height:2; color:var(--ink); margin-bottom:30px; }
+  .loc-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--emerald-deep); color:var(--ivory); text-decoration:none;
+    padding:16px 34px; border-radius:40px; font-size:15px; letter-spacing:1px;
+    border:1px solid var(--gold); transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .loc-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 24px rgba(176,141,87,.35); }
+  .loc-btn svg{ width:18px; height:18px; fill:var(--gold-light); }
+
+  footer{ text-align:center; padding:50px 20px 60px; font-family:'Aref Ruqaa',serif; color:var(--gold); font-size:20px; }
+</style>
+</head>
+<body>
+
+  <div class="curtain curtain-left"></div>
+  <div class="curtain curtain-right"></div>
+  <div class="bismillah-loader">بسم الله الرحمن الرحيم</div>
+
+  <main>
+    <section class="hero">
+      <svg class="arch-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 240V90C20 40 60 10 100 10C140 10 180 40 180 90V240" stroke="#B08D57" stroke-width="2"/>
+        <path d="M38 240V95C38 55 65 28 100 28C135 28 162 55 162 95V240" stroke="#B08D57" stroke-width="1"/>
+        <circle cx="100" cy="60" r="3" fill="#B08D57"/>
+        <path d="M100 20 L100 5 M90 12 L110 12" stroke="#B08D57" stroke-width="1"/>
+      </svg>
+      <div class="bism">بسم الله الرحمن الرحيم</div>
+      <div class="eyebrow">دعوة زفاف</div>
+      <div class="hero-date">٢٧ أغسطس ٢٠٢٦ &nbsp;•&nbsp; فندق جويل</div>
+      <h1 class="names">حنان<small>و</small>مؤمن</h1>
+      <div class="scroll-cue">
+        <span>مرر لأسفل</span>
+        <span class="arrow"></span>
+      </div>
+    </section>
+
+    <section class="ayah-section fade-up">
+      <div class="divider"><span></span><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.2L12 16.4 5.7 20.8 8 13.6 2 9.2h7.6z"/></svg><span></span></div>
+      <div class="ayah-quote">❝</div>
+      <p class="ayah-text">
+        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
+      </p>
+      <div class="ayah-source">سورة الروم — آية ٢١</div>
+      <p class="romantic-line">
+        بإذن الله وبركته، نبدأ صفحة جديدة من حياتنا مليئة بالمودة والرحمة،<br>
+        ونتشرف بدعوتكم لمشاركتنا أسعد لحظة في حياتنا، وتكونوا شهودًا على بداية قِرانٍ مبارك.
+      </p>
+    </section>
+
+    <section class="countdown fade-up-wrap fade-up">
+      <h2 class="countdown-title">بقي على فرحنا</h2>
+      <div class="countdown" id="countdown">
+        <div class="cbox"><div class="num" id="cd-days">--</div><div class="label">يوم</div></div>
+        <div class="cbox"><div class="num" id="cd-hours">--</div><div class="label">ساعة</div></div>
+        <div class="cbox"><div class="num" id="cd-mins">--</div><div class="label">دقيقة</div></div>
+        <div class="cbox"><div class="num" id="cd-secs">--</div><div class="label">ثانية</div></div>
+      </div>
+    </section>
+
+    <section class="details-section fade-up">
+      <div class="divider"><span></span><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.2L12 16.4 5.7 20.8 8 13.6 2 9.2h7.6z"/></svg><span></span></div>
+      <h2 class="countdown-title" style="margin-bottom:26px;">تفاصيل الفرح</h2>
+
+      <div class="detail-card">
+        <svg viewBox="0 0 24 24"><path d="M7 2v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-2V2h-2v2H9V2H7zm12 8v10H5V10h14z"/></svg>
+        <div><div class="d-title">التاريخ</div><div class="d-value">الخميس، ٢٧ أغسطس ٢٠٢٦</div></div>
+      </div>
+
+      <div class="detail-card">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 10.6l4.2 2.5-.75 1.25L11 13V6h1.5v6.6z"/></svg>
+        <div><div class="d-title">الموعد</div><div class="d-value">من الساعة ٦ مساءً حتى ١٢ منتصف الليل</div></div>
+      </div>
+
+      <div class="detail-card">
+        <svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+        <div><div class="d-title">المكان</div><div class="d-value">فندق جويل</div></div>
+      </div>
+    </section>
+
+    <section class="location-cta fade-up">
+      <div class="divider"><span></span><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.2L12 16.4 5.7 20.8 8 13.6 2 9.2h7.6z"/></svg><span></span></div>
+      <p class="loc-msg">
+        وجودكم يكمل فرحتنا 🤍<br>
+        بانتظاركم في فندق جويل
+      </p>
+      <a class="loc-btn" href="https://maps.app.goo.gl/kSPeVbeRi5a4qB3H9?g_st=iw" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+        افتح الموقع على الخريطة
+      </a>
+    </section>
+
+    <footer>حنان &amp; مؤمن</footer>
+  </main>
+
+<script>
+  // curtain open
+  window.addEventListener('load', () => {
+    setTimeout(() => document.body.classList.add('opened'), 500);
+  });
+
+  // scroll fade-ins
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // countdown to Aug 27 2026, 6:00 PM
+  const target = new Date('2026-08-27T18:00:00');
+  function tick(){
+    const now = new Date();
+    let diff = target - now;
+    if(diff < 0) diff = 0;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = h.toString().padStart(2,'0');
+    document.getElementById('cd-mins').textContent = m.toString().padStart(2,'0');
+    document.getElementById('cd-secs').textContent = s.toString().padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+
+  // falling petals (hero only, gentle)
+  function spawnPetal(){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random()*100 + 'vw';
+    p.style.animationDuration = (6 + Math.random()*5) + 's';
+    p.style.opacity = 0.4 + Math.random()*0.4;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 11000);
+  }
+  setInterval(spawnPetal, 900);
+</script>
+</body>
+</html>
